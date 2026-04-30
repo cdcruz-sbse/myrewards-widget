@@ -183,6 +183,7 @@
     justify-content: space-between;
     padding: 12px 0;
     border-bottom: 1px solid var(--bg-accent);
+    gap: 12px;
   }
   .reward-stat-row:last-of-type { border-bottom: none; }
   .reward-stat-label {
@@ -191,6 +192,7 @@
     gap: 10px;
     font-size: 14px;
     color: var(--text-secondary);
+    min-width: 0;
   }
   .reward-stat-icon {
     width: 32px; height: 32px;
@@ -201,14 +203,80 @@
     font-size: 14px;
     flex-shrink: 0;
   }
-  .icon-points { background: var(--accent-gold-light); }
-  .icon-rewards { background: var(--accent-green-light); }
-  .icon-kudos { background: #EDE0F7; }
+  .icon-redeem { background: var(--accent-gold-light); }
+  .icon-recent { background: #EDE0F7; }
+  .icon-ytd { background: var(--accent-green-light); }
   .reward-stat-value {
     font-family: 'Fraunces', serif;
     font-size: 20px;
     font-weight: 700;
     color: var(--text-primary);
+    flex-shrink: 0;
+  }
+  .reward-stat-value .currency {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-right: 1px;
+  }
+
+  /* ── Recent Recognition row (custom layout) ── */
+  .recent-row {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--bg-accent);
+    gap: 10px;
+  }
+  .recent-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .recent-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    min-width: 0;
+  }
+  .recent-amount {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    flex-shrink: 0;
+  }
+  .recent-amount .currency {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-right: 1px;
+  }
+  .recent-detail {
+    background: var(--bg-accent);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-left: 42px; /* align under text after the icon */
+  }
+  .recent-sender {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+  }
+  .recent-message {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-style: italic;
+    line-height: 1.45;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 
   .rewards-cta {
@@ -286,17 +354,12 @@
     .widget-header h1 { font-size: 22px; }
     .section-header { padding: 16px 16px 12px; }
     .rewards-body { padding: 18px 16px; }
+    .recent-detail { margin-left: 0; }
   }
 </style>
 </head>
 <body>
 <div class="widget-container">
-
-  <!-- Header -->
-  <div class="widget-header fade-in">
-    <h1>Recognition Hub</h1>
-    <p>Powered by Gusto Rewards — Celebrating our people</p>
-  </div>
 
   <!-- Main Content Grid -->
   <div class="main-grid">
@@ -305,40 +368,49 @@
     <div class="rewards-panel fade-in">
       <div class="section-header">
         <span class="section-title">Your Rewards</span>
-        <a class="section-action" href="https://app.gusto.com/rewards" target="_blank" rel="noopener">Manage rewards</a>
+        <a class="section-action" href="https://app.guusto.com/rewards" target="_blank" rel="noopener">Manage rewards</a>
       </div>
       <div class="rewards-body">
         <div class="rewards-greeting">
-          Welcome back, <strong>Alex</strong> — here's where you stand this month.
+          Welcome back, <strong>Alex</strong> — here's what's waiting for you.
         </div>
 
+        <!-- Tile 1: Available to Redeem -->
         <div class="reward-stat-row">
           <div class="reward-stat-label">
-            <div class="reward-stat-icon icon-points">✦</div>
-            Points Available
+            <div class="reward-stat-icon icon-redeem">✦</div>
+            Available to Redeem
           </div>
-          <div class="reward-stat-value">350</div>
+          <div class="reward-stat-value"><span class="currency">$</span>125</div>
         </div>
 
-        <div class="reward-stat-row">
-          <div class="reward-stat-label">
-            <div class="reward-stat-icon icon-rewards">🎁</div>
-            Rewards Redeemed
+        <!-- Tile 2: Most Recent Recognition (custom layout) -->
+        <div class="recent-row">
+          <div class="recent-top">
+            <div class="recent-label">
+              <div class="reward-stat-icon icon-recent">💬</div>
+              Most Recent Recognition
+            </div>
+            <div class="recent-amount"><span class="currency">$</span>50</div>
           </div>
-          <div class="reward-stat-value">2</div>
+          <div class="recent-detail">
+            <div class="recent-sender">From Priya Mehta</div>
+            <div class="recent-message">"Thanks for jumping in on the launch deck — you saved our week!"</div>
+          </div>
         </div>
 
+        <!-- Tile 3: Total Received This Year -->
         <div class="reward-stat-row">
           <div class="reward-stat-label">
-            <div class="reward-stat-icon icon-kudos">💬</div>
-            Kudos Received
+            <div class="reward-stat-icon icon-ytd">🎁</div>
+            Total Received This Year
           </div>
-          <div class="reward-stat-value">5</div>
+          <div class="reward-stat-value"><span class="currency">$</span>340</div>
         </div>
 
         <div class="rewards-cta">
-          <p>Redeem your points for gift cards, donations, or company swag.</p>
-          <a class="claim-btn" href="https://app.gusto.com/rewards/redeem" target="_blank" rel="noopener">
+          <p>Redeem your gifts for gift cards, donations, or company swag.</p>
+          <a class="claim-btn" href="https://app.guusto.com/rewards/redeem" target="_blank" rel="noopener">
             Go to Guusto Dashboard
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
